@@ -6,6 +6,7 @@ import argparse
 from prompts import system_prompt
 from functions.call_function import available_functions
 
+
 def main():
 
     load_dotenv()
@@ -37,6 +38,12 @@ def main():
         print(f"User prompt: {args.user_prompt}")
         print(f"Prompt tokens: {response.usage_metadata.prompt_token_count}")
         print(f"Response tokens:{response.usage_metadata.candidates_token_count}")
-    print(f"Response:\n{response.text}")
+
+    if response.function_calls is not None:
+        for function_call in response.function_calls:
+            print(f"Calling function: {function_call.name}({function_call.args})")
+    else:
+        print(f"Response:\n{response.text}")
+        
 if __name__ == "__main__":
     main()

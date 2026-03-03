@@ -1,5 +1,5 @@
 import os
-import types
+from google.genai import types
 
 schema_get_files_info = types.FunctionDeclaration(
     name="get_files_info",
@@ -14,7 +14,6 @@ schema_get_files_info = types.FunctionDeclaration(
         },
     ),
 )
-
 
 def get_files_info(working_directory, directory="."):
     try:
